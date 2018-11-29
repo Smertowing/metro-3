@@ -1,4 +1,4 @@
-manager_list = ['for','while','if','elif','=<','=>','!=','==','in','<','>']
+manager_list = ['for','while','if','elif','=<','=>','!=','==','in','<','>','and']
 assigment_list = ['=']
 
 set_manager = set()
@@ -20,7 +20,7 @@ operators = ['+', '-', '*', '**', '/', '//', '%', '@', '<<',
                 'class', 'continue', 'def', 'del', 'elif', 'else', 'except',
                 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is',
                 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return',
-                'try', 'while', 'with', 'yield',' ']
+                'try', 'while', 'with', 'yield',' ','as']
 operators_set = set(operators)
 operands = []
 
@@ -41,7 +41,12 @@ def manager_string(string):
             string = string[:ind] + string[ind + len(mem) + len(elem) + 2:]
 
             if elem.find('(') == -1 and (not(elem.isnumeric())):
-                set_manager.add(elem)
+                if elem not in set_input:
+                    set_manager.add(elem)
+                else:
+                    set_manager.add(elem)
+                    set_input.discard(elem)
+
 
             manager_string(string)
 
@@ -84,8 +89,8 @@ def input_string(string):
 
     ind = string.find('=input(')
     if ind != -1:
-
-        set_input.add(string[:ind])
+        if string[:ind] not in set_manager:
+            set_input.add(string[:ind])
 
 
 def chepin_exetended(list):

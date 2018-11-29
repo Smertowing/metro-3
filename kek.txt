@@ -1,0 +1,19 @@
+mem = True
+a = input()
+b = input()
+c = input()
+if a:
+    kek = 2
+    sum = a + b
+    sum += 3
+    for i in range(10):
+        c += sum
+d = input()
+print(sum)
+if d:
+    kek = 2
+    b = a + d
+    for i in range(10):
+        c += sum
+
+
