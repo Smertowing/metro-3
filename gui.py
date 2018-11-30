@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QGridLayout, QWidget, QTa
     QPushButton, QMessageBox
 from PyQt5.QtCore import QSize, Qt, QCoreApplication
 from PyQt5 import QtGui
-
+from tkinter import messagebox as msg
 
 # Наследуемся от QMainWindow
 class MainWindow(QMainWindow):
@@ -47,8 +47,6 @@ class MainWindow(QMainWindow):
         table.setItem(1, 2, QTableWidgetItem(str(result[0][6])))
         table.setItem(1, 3, QTableWidgetItem(str(result[0][7])))
 
-
-
         # расширенный
 
         table1 = QTableWidget(self)  # Создаём таблицу
@@ -86,19 +84,28 @@ class MainWindow(QMainWindow):
         rowcount = len(result[2])
         table2 = QTableWidget(self)  # Создаём таблицу
         table2.setColumnCount(2)  # Устанавливаем три колонки
-        table2.setRowCount(rowcount)
+        table2.setRowCount(rowcount+1)
         table2.setHorizontalHeaderLabels(["  Переменная  ", "  Спен  "])
 
         i = 0
+        sum = 0
         for x,y in list(result[2].items()):
 
             table2.setItem(i, 0, QTableWidgetItem(x))
             table2.setItem(i, 1, QTableWidgetItem(str(y)))
+            sum += y
             i += 1
+
+        table2.setItem(rowcount , 0, QTableWidgetItem('Суммарный спен: '))
+        table2.setItem(rowcount , 1, QTableWidgetItem(str(sum)))
 
         grid_layout.addWidget(table,  0, 0)  # Добавляем таблицу в сетку
         grid_layout.addWidget(table1, 1, 0)
         grid_layout.addWidget(table2, 2, 0)
+
+        str1 = 'Q = P + 2M + 3C + 0.5T = '+str(3*result[0][4]+2*result[0][5]+result[0][6]+0.5*result[0][7])
+        str2 = 'Q = P + 2M + 3C + 0.5T = '+str(3*result[1][4]+2*result[1][5]+result[1][6]+0.5*result[1][7])
+        msg.showinfo('Q\'s',str1+'\n'+str2)
 
     def get_data(self, list_of_dict):
         chepin = list_of_dict[0]

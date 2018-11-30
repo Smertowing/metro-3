@@ -120,11 +120,11 @@ def spen_req(string):
     for elem in temp_str_list:
         elem = elem.replace(' ','')
         if elem not in operators_set:
-            if elem.find('(') == -1:
+            if elem.find('(') == -1 and elem.find(')') == -1:
                 operands.append(elem)
                 #print(operands)
             else:
-                temp_string = string[string.find('(')+1:string.find(')')]
+                temp_string = elem[elem.find('(')+1:elem.find(')')]
                 # print(temp_string)
                 spen_req(temp_string)
 
